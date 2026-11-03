@@ -24,7 +24,16 @@ titleElement.replaceChildren(
     className: "player-name-highlight",
     textContent: playerName
   }),
-  document.createTextNode(titleParts[1] || "")
+  document.createTextNode(titleParts[1] || ""),
+  ...(mode === "win"
+    ? [
+        document.createTextNode(" - "),
+        Object.assign(document.createElement("span"), {
+          className: "player-name-highlight",
+          textContent: `TỔ: ${team}`
+        })
+      ]
+    : [])
 );
 
     const messageGroups = window.QRLuckyMessages || {};
@@ -33,13 +42,10 @@ titleElement.replaceChildren(
       ? messages[Math.floor(Math.random() * messages.length)]
       : config.message;
 messageElement.classList.remove("typing-message");
-
-messageElement.textContent = mode === "win"
-  ? `Tổ: ${team}`
-  : message;
+messageElement.textContent = message;
 
 document.getElementById("prizeNote").textContent = mode === "win"
-  ? `Mã nhận quà: ${claimCode}\nChúc mừng bạn đã trúng thưởng! Hãy chụp màn hình kết quả này và đưa cho Ban Tổ chức để nhận quà nhé!`
+  ? `Mã phần quà bạn nhận được là: ${prizeCode}\nChúc mừng bạn đã trúng thưởng! Hãy chụp màn hình kết quả này và đưa cho Ban Tổ chức để nhận quà nhé!`
   : config.note;
     panel.classList.remove("is-win", "is-lose", "reveal");
     panel.classList.add(mode === "win" ? "is-win" : "is-lose");
