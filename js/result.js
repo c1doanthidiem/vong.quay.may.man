@@ -42,9 +42,9 @@ titleElement.replaceChildren(
       ? `Phần quà của bạn: ${prizeName}`
       : message;
     messageElement.classList.remove("typing-message");
-    document.getElementById("prizeNote").textContent = mode === "win" && claimCode
-      ? `Mã số nhận quà của bạn là: ${claimCode}`
-      : config.note;
+document.getElementById("prizeNote").textContent = mode === "win"
+  ? "Chúc mừng bạn! Hãy chụp màn hình kết quả này và đưa cho Ban Tổ chức để nhận quà nhé!"
+  : config.note;
 
     // 2. Cập nhật trạng thái class & hiển thị DOM
     panel.classList.remove("is-win", "is-lose", "reveal");
