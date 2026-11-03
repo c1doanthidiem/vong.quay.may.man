@@ -1,10 +1,10 @@
+
 (function initQRGame() {
   const form = document.getElementById("playerForm");
   const nameInput = document.getElementById("playerName");
   const yearInput = document.getElementById("birthYear");
   const teamInput = document.getElementById("teamName");
   const errorBox = document.getElementById("formError");
-  const mode = document.body.dataset.result === "win" ? "win" : "lose";
   const button = document.getElementById("openButton");
 
   if (!form || !nameInput || !yearInput || !teamInput || !errorBox || !button) return;
@@ -51,18 +51,18 @@
         new Promise(resolve => setTimeout(resolve, 1800))
       ]);
 
-      if (!data || !data.success || data.result !== "win" || !data.claimCode) {
+      if (!data || !data.success || data.result !== "win" || !data.prizeCode) {
         throw new Error(data?.message || "Chưa nhận được kết quả hợp lệ.");
       }
 
       loadingMessage.remove();
 
       window.QRGameResult.show({
-       name: data.name || validation.name,
-team: data.team || validation.team,
-mode: "win",
-prizeName: data.prizeName,
-prizeCode: data.prizeCode
+        name: data.name || validation.name,
+        team: data.team || validation.team,
+        mode: "win",
+        prizeName: data.prizeName,
+        prizeCode: data.prizeCode
       });
 
     } catch (error) {
