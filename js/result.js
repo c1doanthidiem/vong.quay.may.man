@@ -1,7 +1,5 @@
 window.QRGameResult = {
-  // Lưu trữ timeout id để clear nếu gọi lại show() nhiều lần liên tiếp
   _revealTimeout: null,
-
   show({ name, mode, prizeName, claimCode }) {
     const config = window.QRGameConfig[mode] || window.QRGameConfig.lose;
     const form = document.getElementById("playerForm");
@@ -10,14 +8,10 @@ window.QRGameResult = {
     const canvas = document.getElementById("scratchCanvas");
     const card = document.getElementById("scratchResultCard");
     const messageElement = document.getElementById("resultMessage");
-
-    // Xóa timeout cũ nếu có
     if (this._revealTimeout) {
       clearTimeout(this._revealTimeout);
       this._revealTimeout = null;
     }
-
-    // 1. Cập nhật dữ liệu
     document.getElementById("resultEmoji").textContent = config.emoji;
 const titleElement = document.getElementById("resultTitle");
 const playerName = name.toLocaleUpperCase("vi-VN");
@@ -45,8 +39,6 @@ titleElement.replaceChildren(
 document.getElementById("prizeNote").textContent = mode === "win"
   ? "Chúc mừng bạn! Hãy chụp màn hình kết quả này và đưa cho Ban Tổ chức để nhận quà nhé!"
   : config.note;
-
-    // 2. Cập nhật trạng thái class & hiển thị DOM
     panel.classList.remove("is-win", "is-lose", "reveal");
     panel.classList.add(mode === "win" ? "is-win" : "is-lose");
 
@@ -59,16 +51,12 @@ document.getElementById("prizeNote").textContent = mode === "win"
     scratchArea.hidden = false;
     canvas.hidden = false;
     form.hidden = true;
-
-    // 3. Khởi tạo scratch card
     if (window.QRScratchCard && canvas) {
       window.QRScratchCard.init({
         canvas,
         mode,
         onReveal: () => {
           scratchArea.classList.add("scratch-revealed");
-
-          // Kích hoạt lại animation typing mượt mà không dùng offsetWidth
           messageElement.classList.remove("typing-message");
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
