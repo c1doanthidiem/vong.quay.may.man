@@ -58,11 +58,11 @@
       loadingMessage.remove();
 
       window.QRGameResult.show({
-        name: data.name || validation.name,
-        team: data.team || validation.team,
-        mode: "win",
-        prizeName: data.prizeName,
-        claimCode: data.claimCode
+       name: data.name || validation.name,
+team: data.team || validation.team,
+mode: "win",
+prizeName: data.prizeName,
+prizeCode: data.prizeCode
       });
 
     } catch (error) {
