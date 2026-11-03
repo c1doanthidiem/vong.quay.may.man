@@ -46,10 +46,12 @@ const message = mode === "win"
       : config.message);
 
 messageElement.classList.remove("typing-message");
-messageElement.textContent = message;
+messageElement.textContent = mode === "win"
+  ? `Mã nhận thưởng của bạn là: ${prizeCode}`
+  : message;
 
 document.getElementById("prizeNote").textContent = mode === "win"
-  ? `Mã nhận thưởng của bạn là: ${prizeCode}`
+  ? "Chúc mừng bạn đã trúng thưởng, nhanh tay chụp lại màn hình và lên sân khấu nhận thưởng nhéeeee!"
   : config.note;
     panel.classList.remove("is-win", "is-lose", "reveal");
     panel.classList.add(mode === "win" ? "is-win" : "is-lose");
