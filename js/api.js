@@ -1,6 +1,6 @@
 /* Dán URL Web App /exec hiện tại vào đây trước khi đăng website. */
 window.QRGameAPI = {
-  endpoint: "PASTE_GOOGLE_APPS_SCRIPT_EXEC_URL_HERE",
+  endpoint: "https://script.google.com/macros/s/AKfycbw_i2BpmDTOHz7QeCKSKcazsh7DD3DHBu__M4XR4ZP-HcC_nhVH4CtTU3jQKnyASxVBHg/exec",
   play(name) {
     return new Promise((resolve, reject) => {
       if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(this.endpoint)) {
