@@ -33,11 +33,11 @@ titleElement.replaceChildren(
       : config.message;
 
     messageElement.textContent = mode === "win" && prizeName
-      ? `Phần quà của bạn: ${prizeName}`
+      ? `Mã số phần thưởng của bạn là: ${prizeName}`
       : message;
     messageElement.classList.remove("typing-message");
 document.getElementById("prizeNote").textContent = mode === "win"
-  ? "Chúc mừng bạn! Hãy chụp màn hình kết quả này và đưa cho Ban Tổ chức để nhận quà nhé!"
+  ? "Chúc mừng bạn đã trúng thưởng! Hãy chụp màn hình mã số này và đưa cho Ban Tổ chức để nhận quà nhé!"
   : config.note;
     panel.classList.remove("is-win", "is-lose", "reveal");
     panel.classList.add(mode === "win" ? "is-win" : "is-lose");
