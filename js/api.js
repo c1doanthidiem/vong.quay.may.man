@@ -1,7 +1,7 @@
 /* Dán URL Web App /exec hiện tại vào đây trước khi đăng website. */
 window.QRGameAPI = {
   endpoint: "https://script.google.com/macros/s/AKfycbw_i2BpmDTOHz7QeCKSKcazsh7DD3DHBu__M4XR4ZP-HcC_nhVH4CtTU3jQKnyASxVBHg/exec",
-  play(name) {
+  play(name, year, team) {
     return new Promise((resolve, reject) => {
       if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(this.endpoint)) {
         reject(new Error("Chưa cấu hình URL Google Apps Script."));
@@ -25,6 +25,8 @@ window.QRGameAPI = {
       const url = new URL(this.endpoint);
       url.searchParams.set("action", "play");
       url.searchParams.set("name", name);
+      url.searchParams.set("year", year);
+      url.searchParams.set("team", team);
       url.searchParams.set("callback", callback);
       url.searchParams.set("_", String(Date.now()));
       script.src = url.toString();
