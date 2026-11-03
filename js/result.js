@@ -30,7 +30,7 @@ titleElement.replaceChildren(
         document.createTextNode(" - "),
         Object.assign(document.createElement("span"), {
           className: "player-name-highlight",
-          textContent: `TỔ: ${team}`
+          textContent: team
         })
       ]
     : [])
