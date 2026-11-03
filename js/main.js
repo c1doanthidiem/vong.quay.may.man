@@ -1,31 +1,32 @@
-
 (function initQRGame() {
   const form = document.getElementById("playerForm");
   const nameInput = document.getElementById("playerName");
+  const yearInput = document.getElementById("birthYear");
+  const teamInput = document.getElementById("teamName");
   const errorBox = document.getElementById("formError");
   const mode = document.body.dataset.result === "win" ? "win" : "lose";
   const button = document.getElementById("openButton");
 
-  if (!form || !nameInput || !errorBox || !button) return;
+  if (!form || !nameInput || !yearInput || !teamInput || !errorBox || !button) return;
 
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const validation = window.QRGameForm.validateName(nameInput.value);
+    const validation = window.QRGameForm.validate(
+      nameInput.value,
+      yearInput.value,
+      teamInput.value
+    );
 
     if (!validation.valid) {
       errorBox.textContent = validation.message;
-      nameInput.focus();
       return;
     }
 
     errorBox.textContent = "";
-
-    // Khóa nút trong lúc chờ
     button.disabled = true;
     button.textContent = "🎁 Đang mở quà...";
 
-    // Hiển thị thông báo hồi hộp
     let loadingMessage = document.getElementById("loadingMessage");
 
     if (!loadingMessage) {
@@ -41,21 +42,29 @@
     loadingMessage.textContent = "🍀 Một chút hồi hộp... May mắn đang đến!";
 
     try {
-      // Chỉ trang trúng thưởng gọi API; trang trượt không nằm trong gói này.
       const [data] = await Promise.all([
-        window.QRGameAPI.play(validation.name),
+        window.QRGameAPI.play(
+          validation.name,
+          validation.year,
+          validation.team
+        ),
         new Promise(resolve => setTimeout(resolve, 1800))
       ]);
+
       if (!data || !data.success || data.result !== "win" || !data.claimCode) {
         throw new Error(data?.message || "Chưa nhận được kết quả hợp lệ.");
       }
+
       loadingMessage.remove();
+
       window.QRGameResult.show({
         name: data.name || validation.name,
+        team: data.team || validation.team,
         mode: "win",
         prizeName: data.prizeName,
         claimCode: data.claimCode
       });
+
     } catch (error) {
       loadingMessage.remove();
       errorBox.textContent = error.message || "Có lỗi kết nối, vui lòng thử lại.";
