@@ -1,7 +1,7 @@
 window.QRGameResult = {
   _revealTimeout: null,
 
-  show({ name, team, mode, prizeName, claimCode }) {
+  show({ name, team, mode, prizeName, prizeCode }) {
     const config = window.QRGameConfig[mode] || window.QRGameConfig.lose;
     const form = document.getElementById("playerForm");
     const panel = document.getElementById("resultPanel");
