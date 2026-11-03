@@ -1,6 +1,7 @@
 window.QRGameResult = {
   _revealTimeout: null,
-  show({ name, mode, prizeName, claimCode }) {
+
+  show({ name, team, mode, prizeName, claimCode }) {
     const config = window.QRGameConfig[mode] || window.QRGameConfig.lose;
     const form = document.getElementById("playerForm");
     const panel = document.getElementById("resultPanel");
@@ -31,13 +32,14 @@ titleElement.replaceChildren(
     const message = messages.length
       ? messages[Math.floor(Math.random() * messages.length)]
       : config.message;
+messageElement.classList.remove("typing-message");
 
-    messageElement.textContent = mode === "win" && prizeName
-      ? `Mã số phần thưởng của bạn là: ${prizeName}`
-      : message;
-    messageElement.classList.remove("typing-message");
+messageElement.textContent = mode === "win"
+  ? `Tổ: ${team}`
+  : message;
+
 document.getElementById("prizeNote").textContent = mode === "win"
-  ? "Chúc mừng bạn đã trúng thưởng! Hãy chụp màn hình mã số này và đưa cho Ban Tổ chức để nhận quà nhé!"
+  ? `Mã nhận quà: ${claimCode}\nChúc mừng bạn đã trúng thưởng! Hãy chụp màn hình kết quả này và đưa cho Ban Tổ chức để nhận quà nhé!`
   : config.note;
     panel.classList.remove("is-win", "is-lose", "reveal");
     panel.classList.add(mode === "win" ? "is-win" : "is-lose");
