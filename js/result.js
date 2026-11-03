@@ -36,16 +36,20 @@ titleElement.replaceChildren(
     : [])
 );
 
-    const messageGroups = window.QRLuckyMessages || {};
-    const messages = Array.isArray(messageGroups[mode]) ? messageGroups[mode] : [];
-    const message = messages.length
+const messageGroups = window.QRLuckyMessages || {};
+const messages = Array.isArray(messageGroups[mode]) ? messageGroups[mode] : [];
+
+const message = mode === "win"
+  ? "Chúc mừng bạn đã trúng thưởng!"
+  : (messages.length
       ? messages[Math.floor(Math.random() * messages.length)]
-      : config.message;
+      : config.message);
+
 messageElement.classList.remove("typing-message");
 messageElement.textContent = message;
 
 document.getElementById("prizeNote").textContent = mode === "win"
-  ? `Mã phần quà bạn nhận được là: ${prizeCode}\nChúc mừng bạn đã trúng thưởng! Hãy chụp màn hình kết quả này và đưa cho Ban Tổ chức để nhận quà nhé!`
+  ? `Mã nhận thưởng của bạn là: ${prizeCode}`
   : config.note;
     panel.classList.remove("is-win", "is-lose", "reveal");
     panel.classList.add(mode === "win" ? "is-win" : "is-lose");
