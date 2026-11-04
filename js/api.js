@@ -1,6 +1,6 @@
 /* Dán URL Web App /exec hiện tại vào đây trước khi đăng website. */
 window.QRGameAPI = {
-  endpoint: "https://script.google.com/macros/s/AKfycbxCdcnEvuWcykpbiBWVn_oKA_jL1NBTrvvf7Cm-bIMA4P2-7tJPnbH59_3M3T4hfFwVeg/exec",
+  endpoint: "https://script.google.com/macros/s/AKfycbwHfmy79KV7tt_zk6iQp37G3zbvRUEeIVHXQexkrwxTx2UZNj3bBIkQ07b18Xo43LmrMw/exec",
   play(name, year, team) {
     return new Promise((resolve, reject) => {
       if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(this.endpoint)) {
